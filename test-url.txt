@@ -1,0 +1,12 @@
+# longtermcare.or.kr 테스트 URL
+
+## 실제 검색 결과가 있는 URL (서울특별시, 재가장기요양기관)
+https://longtermcare.or.kr/npbs/r/a/201/selectLtcoSrch.web?menuId=nps0102&adminDc=&adminSeq=&pageNum=1&zoomSize=10&itemCnt=10&viewType=list&sidoCd=11&sigungCd=&grdFacCls1=H2&facNm=&evalYr=&evalGs=&paymtStatus=&paymtOpen=
+
+## 파라미터 설명:
+- sidoCd=11: 서울특별시
+- grdFacCls1=H2: 재가장기요양기관
+- pageNum=1: 첫 페이지
+- itemCnt=10: 10개씩 표시
+
+이 URL을 프로젝트의 Target URL로 업데이트하세요!

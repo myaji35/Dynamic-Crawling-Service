@@ -1,0 +1,58 @@
+# FlexCrawler - 국가통계포털(KOSIS) 크롤링 예제
+# 통계청에서 제공하는 주요 통계 데이터 수집
+
+version: '1.0'
+
+job:
+  name: 'KOSIS - 인구 통계 데이터'
+  description: '국가통계포털에서 주요 인구 통계 정보 크롤링'
+
+  pipeline:
+    - step: crawl
+      source:
+        type: web
+        url: 'https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_1B040M5'
+
+        timeout: 40000
+        wait_for: networkidle
+
+        fields:
+          # 테이블 제목
+          table_title:
+            selector: 'h2.title'
+            transform: trim
+
+          # 통계 항목명
+          stat_items:
+            selector: 'table.tbl tbody th'
+            multiple: true
+            transform: trim
+
+          # 통계 수치
+          stat_values:
+            selector: 'table.tbl tbody td'
+            multiple: true
+            transform: trim
+
+          # 기간 정보
+          period:
+            selector: '.period-info'
+            transform: trim
+
+          # 갱신일자
+          updated_date:
+            selector: '.update-date'
+            transform: trim
+
+      retry:
+        max_attempts: 3
+        backoff: exponential
+
+    - step: transform
+      rules:
+        - filter: '${stat_items.length > 0}'
+
+    - step: load
+      destination:
+        type: json
+        path: './output/kosis-statistics.json'

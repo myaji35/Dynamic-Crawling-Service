@@ -1,0 +1,65 @@
+# FlexCrawler - 한국 공공데이터 포털 크롤링 예제
+# data.go.kr 에서 공공데이터 목록 수집
+
+version: '1.0'
+
+job:
+  name: '공공데이터포털 - 인기 데이터셋 크롤링'
+  description: 'data.go.kr에서 인기 있는 공공데이터 목록 및 정보 수집'
+
+  pipeline:
+    - step: crawl
+      source:
+        type: web
+        url: 'https://www.data.go.kr/tcs/dss/selectDataSetList.do'
+
+        timeout: 30000
+        wait_for: networkidle
+
+        # 추출할 필드 정의
+        fields:
+          # 데이터셋 제목
+          dataset_titles:
+            selector: '.result-list .title'
+            multiple: true
+            transform: trim
+
+          # 데이터셋 설명
+          dataset_descriptions:
+            selector: '.result-list .txt'
+            multiple: true
+            transform: remove_whitespace
+
+          # 제공기관
+          providers:
+            selector: '.result-list .source'
+            multiple: true
+            transform: trim
+
+          # 조회수
+          view_counts:
+            selector: '.result-list .count'
+            multiple: true
+            transform: extract_number
+
+          # 데이터셋 링크
+          dataset_links:
+            selector: '.result-list .title a'
+            attribute: 'href'
+            multiple: true
+
+      retry:
+        max_attempts: 3
+        backoff: exponential
+
+    - step: transform
+      rules:
+        # 유효한 데이터만 필터링
+        - filter: '${dataset_titles.length > 0}'
+        # 중복 제거
+        - deduplicate: ['dataset_titles']
+
+    - step: load
+      destination:
+        type: json
+        path: './output/korea-public-data.json'

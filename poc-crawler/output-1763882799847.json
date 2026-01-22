@@ -1,0 +1,17 @@
+{
+  "url": "https://longtermcare.or.kr/npbs/r/a/201/selectXLtcoSrch",
+  "data": {
+    "facility_names": [],
+    "facility_types": [],
+    "addresses": [],
+    "phone_numbers": [],
+    "capacities": [],
+    "current_users": [],
+    "ratings": []
+  },
+  "metadata": {
+    "scrapedAt": "2025-11-23T07:26:39.837Z",
+    "loadTime": 25967,
+    "fieldsExtracted": 7
+  }
+}

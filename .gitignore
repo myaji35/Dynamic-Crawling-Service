@@ -39,3 +39,36 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma
+
+# DCS specific
+gcp-service-account-key.json
+gcp-*.json
+*.log
+.vscode/
+.idea/
+crawling-worker/dist/
+crawling-worker/node_modules/
+
+# Database backups
+backups/
+*.sql
+*.dump
+
+# Cloud SQL Proxy
+cloud-sql-proxy
+cloud_sql_proxy
+.cloud-sql-proxy.pid
+.env.gcp
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/tests/downloads/
+/tests/videos/
+/tests/screenshots/
+
+# clerk configuration (can include secrets)
+/.clerk/

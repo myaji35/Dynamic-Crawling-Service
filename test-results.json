@@ -1,0 +1,457 @@
+{
+  "config": {
+    "configFile": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/playwright.config.ts",
+    "rootDir": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests",
+    "forbidOnly": true,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      ["html", null],
+      [
+        "json",
+        {
+          "outputFile": "test-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests",
+        "testIgnore": [],
+        "testMatch": ["**/*.@(spec|test).?(c|m)[jt]s?(x)"],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://localhost:3010",
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
+  },
+  "suites": [
+    {
+      "title": "e2e/projects/create-project.spec.ts",
+      "file": "e2e/projects/create-project.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "프로젝트 생성",
+          "file": "e2e/projects/create-project.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "새 프로젝트 생성 페이지 접근",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 17102,
+                      "error": {
+                        "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n",
+                        "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n\n    at ProjectsPage.clickNewProject (/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts:32:33)\n    at /Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/e2e/projects/create-project.spec.ts:18:24",
+                        "location": {
+                          "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                          "column": 33,
+                          "line": 32
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mpages/ProjectsPage.ts:32\n\n  30 |    */\n  31 |   async clickNewProject(): Promise<void> {\n> 32 |     await this.newProjectButton.click();\n     |                                 ^\n  33 |     await this.page.waitForURL(/.*\\/dashboard\\/new/);\n  34 |   }\n  35 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                            "column": 33,
+                            "line": 32
+                          },
+                          "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n\n\n   at pages/ProjectsPage.ts:32\n\n  30 |    */\n  31 |   async clickNewProject(): Promise<void> {\n> 32 |     await this.newProjectButton.click();\n     |                                 ^\n  33 |     await this.page.waitForURL(/.*\\/dashboard\\/new/);\n  34 |   }\n  35 |\n    at ProjectsPage.clickNewProject (/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts:32:33)\n    at /Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/e2e/projects/create-project.spec.ts:18:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-24T02:07:03.453Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-project-프로젝트-생성-새-프로젝트-생성-페이지-접근-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-project-프로젝트-생성-새-프로젝트-생성-페이지-접근-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-project-프로젝트-생성-새-프로젝트-생성-페이지-접근-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                        "column": 33,
+                        "line": 32
+                      }
+                    },
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 21234,
+                      "error": {
+                        "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n\u001b[2m    - waiting for\" https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=787459168867-0v2orf3qo56uocsi84iroseoahhuovdm.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fclerk.shared.lcl.dev%2Fv1%2…\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S1664779867%3A1763950060107119&access_type=offline&client_id=787459168867-0v2orf3qo56uocsi84iroseoahhuovdm.apps.googleusercontent.c…\"\u001b[22m\n",
+                        "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n\u001b[2m    - waiting for\" https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=787459168867-0v2orf3qo56uocsi84iroseoahhuovdm.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fclerk.shared.lcl.dev%2Fv1%2…\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S1664779867%3A1763950060107119&access_type=offline&client_id=787459168867-0v2orf3qo56uocsi84iroseoahhuovdm.apps.googleusercontent.c…\"\u001b[22m\n\n    at ProjectsPage.clickNewProject (/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts:32:33)\n    at /Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/e2e/projects/create-project.spec.ts:18:24",
+                        "location": {
+                          "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                          "column": 33,
+                          "line": 32
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mpages/ProjectsPage.ts:32\n\n  30 |    */\n  31 |   async clickNewProject(): Promise<void> {\n> 32 |     await this.newProjectButton.click();\n     |                                 ^\n  33 |     await this.page.waitForURL(/.*\\/dashboard\\/new/);\n  34 |   }\n  35 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                            "column": 33,
+                            "line": 32
+                          },
+                          "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n\u001b[2m    - waiting for\" https://accounts.google.com/o/oauth2/auth?access_type=offline&client_id=787459168867-0v2orf3qo56uocsi84iroseoahhuovdm.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fclerk.shared.lcl.dev%2Fv1%2…\" navigation to finish...\u001b[22m\n\u001b[2m    - navigated to \"https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S1664779867%3A1763950060107119&access_type=offline&client_id=787459168867-0v2orf3qo56uocsi84iroseoahhuovdm.apps.googleusercontent.c…\"\u001b[22m\n\n\n   at pages/ProjectsPage.ts:32\n\n  30 |    */\n  31 |   async clickNewProject(): Promise<void> {\n> 32 |     await this.newProjectButton.click();\n     |                                 ^\n  33 |     await this.page.waitForURL(/.*\\/dashboard\\/new/);\n  34 |   }\n  35 |\n    at ProjectsPage.clickNewProject (/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts:32:33)\n    at /Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/e2e/projects/create-project.spec.ts:18:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-24T02:07:23.224Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-project-프로젝트-생성-새-프로젝트-생성-페이지-접근-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-project-프로젝트-생성-새-프로젝트-생성-페이지-접근-chromium-retry1/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-project-프로젝트-생성-새-프로젝트-생성-페이지-접근-chromium-retry1/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-project-프로젝트-생성-새-프로젝트-생성-페이지-접근-chromium-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                        "column": 33,
+                        "line": 32
+                      }
+                    },
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 18208,
+                      "error": {
+                        "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n",
+                        "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n\n    at ProjectsPage.clickNewProject (/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts:32:33)\n    at /Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/e2e/projects/create-project.spec.ts:18:24",
+                        "location": {
+                          "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                          "column": 33,
+                          "line": 32
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mpages/ProjectsPage.ts:32\n\n  30 |    */\n  31 |   async clickNewProject(): Promise<void> {\n> 32 |     await this.newProjectButton.click();\n     |                                 ^\n  33 |     await this.page.waitForURL(/.*\\/dashboard\\/new/);\n  34 |   }\n  35 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                            "column": 33,
+                            "line": 32
+                          },
+                          "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n\n\n   at pages/ProjectsPage.ts:32\n\n  30 |    */\n  31 |   async clickNewProject(): Promise<void> {\n> 32 |     await this.newProjectButton.click();\n     |                                 ^\n  33 |     await this.page.waitForURL(/.*\\/dashboard\\/new/);\n  34 |   }\n  35 |\n    at ProjectsPage.clickNewProject (/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts:32:33)\n    at /Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/e2e/projects/create-project.spec.ts:18:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-24T02:07:50.174Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-project-프로젝트-생성-새-프로젝트-생성-페이지-접근-chromium-retry2/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-project-프로젝트-생성-새-프로젝트-생성-페이지-접근-chromium-retry2/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-project-프로젝트-생성-새-프로젝트-생성-페이지-접근-chromium-retry2/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                        "column": 33,
+                        "line": 32
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2dde763cc20fb719890a-ebc2d7df884b522cc884",
+              "file": "e2e/projects/create-project.spec.ts",
+              "line": 17,
+              "column": 3
+            },
+            {
+              "title": "필수 필드 없이 다음 버튼 클릭 시 진행 안됨",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 16055,
+                      "error": {
+                        "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n",
+                        "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n\n    at ProjectsPage.clickNewProject (/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts:32:33)\n    at /Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/e2e/projects/create-project.spec.ts:32:24",
+                        "location": {
+                          "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                          "column": 33,
+                          "line": 32
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mpages/ProjectsPage.ts:32\n\n  30 |    */\n  31 |   async clickNewProject(): Promise<void> {\n> 32 |     await this.newProjectButton.click();\n     |                                 ^\n  33 |     await this.page.waitForURL(/.*\\/dashboard\\/new/);\n  34 |   }\n  35 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                            "column": 33,
+                            "line": 32
+                          },
+                          "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n\n\n   at pages/ProjectsPage.ts:32\n\n  30 |    */\n  31 |   async clickNewProject(): Promise<void> {\n> 32 |     await this.newProjectButton.click();\n     |                                 ^\n  33 |     await this.page.waitForURL(/.*\\/dashboard\\/new/);\n  34 |   }\n  35 |\n    at ProjectsPage.clickNewProject (/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts:32:33)\n    at /Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/e2e/projects/create-project.spec.ts:32:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-11-24T02:08:11.469Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-projec-73eb7-성-필수-필드-없이-다음-버튼-클릭-시-진행-안됨-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-projec-73eb7-성-필수-필드-없이-다음-버튼-클릭-시-진행-안됨-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-projec-73eb7-성-필수-필드-없이-다음-버튼-클릭-시-진행-안됨-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                        "column": 33,
+                        "line": 32
+                      }
+                    },
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 17432,
+                      "error": {
+                        "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n",
+                        "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n\n    at ProjectsPage.clickNewProject (/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts:32:33)\n    at /Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/e2e/projects/create-project.spec.ts:32:24",
+                        "location": {
+                          "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                          "column": 33,
+                          "line": 32
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mpages/ProjectsPage.ts:32\n\n  30 |    */\n  31 |   async clickNewProject(): Promise<void> {\n> 32 |     await this.newProjectButton.click();\n     |                                 ^\n  33 |     await this.page.waitForURL(/.*\\/dashboard\\/new/);\n  34 |   }\n  35 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                            "column": 33,
+                            "line": 32
+                          },
+                          "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n\n\n   at pages/ProjectsPage.ts:32\n\n  30 |    */\n  31 |   async clickNewProject(): Promise<void> {\n> 32 |     await this.newProjectButton.click();\n     |                                 ^\n  33 |     await this.page.waitForURL(/.*\\/dashboard\\/new/);\n  34 |   }\n  35 |\n    at ProjectsPage.clickNewProject (/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts:32:33)\n    at /Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/e2e/projects/create-project.spec.ts:32:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2025-11-24T02:08:29.525Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-projec-73eb7-성-필수-필드-없이-다음-버튼-클릭-시-진행-안됨-chromium-retry1/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-projec-73eb7-성-필수-필드-없이-다음-버튼-클릭-시-진행-안됨-chromium-retry1/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-projec-73eb7-성-필수-필드-없이-다음-버튼-클릭-시-진행-안됨-chromium-retry1/error-context.md"
+                        },
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-projec-73eb7-성-필수-필드-없이-다음-버튼-클릭-시-진행-안됨-chromium-retry1/trace.zip"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                        "column": 33,
+                        "line": 32
+                      }
+                    },
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 17237,
+                      "error": {
+                        "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n",
+                        "stack": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n\n    at ProjectsPage.clickNewProject (/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts:32:33)\n    at /Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/e2e/projects/create-project.spec.ts:32:24",
+                        "location": {
+                          "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                          "column": 33,
+                          "line": 32
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mpages/ProjectsPage.ts:32\n\n  30 |    */\n  31 |   async clickNewProject(): Promise<void> {\n> 32 |     await this.newProjectButton.click();\n     |                                 ^\n  33 |     await this.page.waitForURL(/.*\\/dashboard\\/new/);\n  34 |   }\n  35 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                            "column": 33,
+                            "line": 32
+                          },
+                          "message": "TimeoutError: locator.click: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('button:has-text(\"새 프로젝트\")')\u001b[22m\n\n\n   at pages/ProjectsPage.ts:32\n\n  30 |    */\n  31 |   async clickNewProject(): Promise<void> {\n> 32 |     await this.newProjectButton.click();\n     |                                 ^\n  33 |     await this.page.waitForURL(/.*\\/dashboard\\/new/);\n  34 |   }\n  35 |\n    at ProjectsPage.clickNewProject (/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts:32:33)\n    at /Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/e2e/projects/create-project.spec.ts:32:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 2,
+                      "startTime": "2025-11-24T02:08:48.526Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-projec-73eb7-성-필수-필드-없이-다음-버튼-클릭-시-진행-안됨-chromium-retry2/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-projec-73eb7-성-필수-필드-없이-다음-버튼-클릭-시-진행-안됨-chromium-retry2/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/test-results/e2e-projects-create-projec-73eb7-성-필수-필드-없이-다음-버튼-클릭-시-진행-안됨-chromium-retry2/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/gangseungsig/Documents/02_GitHub/09_Dynamic Crawling Service/tests/pages/ProjectsPage.ts",
+                        "column": 33,
+                        "line": 32
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2dde763cc20fb719890a-e724fad21c133fedaa52",
+              "file": "e2e/projects/create-project.spec.ts",
+              "line": 29,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-11-24T02:07:02.638Z",
+    "duration": 123969.557,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

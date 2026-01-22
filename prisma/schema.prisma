@@ -1,0 +1,213 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// Authentication Models (NextAuth.js)
+// ============================================================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String    // bcrypt hashed
+  name          String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  projects      Project[]
+  apiKeys       ApiKey[]
+  sessions      Session[]
+
+  @@map("users")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// ============================================================================
+// Project Models
+// ============================================================================
+
+model Project {
+  id                String    @id @default(cuid())
+  userId            String
+  name              String    // 사용자 정의 프로젝트명
+  description       String?
+
+  // 데이터 소스 타입
+  dataSourceType    String    @default("web-scraping") // "web-scraping" | "api"
+
+  // 웹 크롤링 설정 (dataSourceType = "web-scraping")
+  urls              Json      // string[] - 크롤링 대상 URL 목록
+  selectors         Json      // Record<string, string> - 필드명 → CSS Selector
+
+  // API 설정 (dataSourceType = "api")
+  apiConfig         Json?     // { endpoint, authType, apiKey, method, params, responseFormat, dataPath }
+
+  scheduleType      String    // "manual" | "hourly" | "daily" | "weekly" | "monthly"
+  scheduleCron      String?   // Cron 표현식 (자동 실행 시)
+
+  // 알림 설정
+  notifyGoogleChat  String?   // Google Chat 웹훅 URL (nullable)
+
+  // 메타데이터
+  status            String    @default("active") // "active" | "paused" | "archived"
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  lastRunAt         DateTime? // 마지막 실행 시각
+
+  // Relations
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  crawlingRuns      CrawlingRun[]
+  apiUsageLogs      ApiUsageLog[]
+
+  @@map("projects")
+  @@index([userId])
+  @@index([status])
+  @@index([lastRunAt])
+}
+
+// ============================================================================
+// Crawling Execution Models
+// ============================================================================
+
+model CrawlingRun {
+  id              String    @id @default(cuid())
+  projectId       String
+
+  // 실행 메타데이터
+  status          String    @default("pending") // "pending" | "running" | "completed" | "failed"
+  startedAt       DateTime  @default(now())
+  completedAt     DateTime?
+
+  // 통계
+  totalTasks      Int       // 총 URL 개수
+  successTasks    Int       @default(0)
+  failedTasks     Int       @default(0)
+
+  // 에러 로그 (실패 시)
+  errorMessage    String?   @db.Text
+
+  // Relations
+  project         Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  tasks           CrawlingTask[]
+
+  @@map("crawling_runs")
+  @@index([projectId])
+  @@index([status])
+  @@index([startedAt])
+}
+
+model CrawlingTask {
+  id              String    @id @default(cuid())
+  runId           String
+  url             String    // 크롤링 대상 URL
+
+  // 작업 상태
+  status          String    @default("pending") // "pending" | "success" | "failed"
+  startedAt       DateTime?
+  completedAt     DateTime?
+
+  // 에러 정보
+  errorMessage    String?   @db.Text
+  retryCount      Int       @default(0)
+
+  // Firestore 참조 (데이터 저장 위치)
+  firestoreDocId  String?   // Firestore 문서 ID
+
+  // Relations
+  run             CrawlingRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+
+  @@map("crawling_tasks")
+  @@index([runId])
+  @@index([status])
+  @@index([url])
+}
+
+// ============================================================================
+// API Key Models
+// ============================================================================
+
+model ApiKey {
+  id              String    @id @default(cuid())
+  userId          String
+  name            String    // 사용자 정의 키 이름 (예: "Production", "Test")
+
+  // 키 정보
+  keyHash         String    @unique // SHA-256 해시
+  keyPrefix       String    // 처음 8자 (표시용, 예: "dcs_1234...")
+
+  // 권한 및 상태
+  permissions     Json      // string[] - ["read", "write"] 등
+  status          String    @default("active") // "active" | "revoked"
+
+  // 사용 통계
+  lastUsedAt      DateTime?
+  requestCount    Int       @default(0)
+
+  // 메타데이터
+  createdAt       DateTime  @default(now())
+  expiresAt       DateTime? // null이면 만료 없음
+
+  // Relations
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("api_keys")
+  @@index([userId])
+  @@index([keyHash])
+  @@index([status])
+}
+
+// ============================================================================
+// API Usage Tracking Models
+// ============================================================================
+
+model ApiUsageLog {
+  id              String    @id @default(cuid())
+  projectId       String
+  date            DateTime  @default(now()) @db.Date // 날짜별로 트래킹
+
+  // 일일 호출 통계
+  callCount       Int       @default(0)
+  dailyLimit      Int       @default(10000) // 일일 제한 (기본값 10000)
+  limitPercentage Float     @default(80.0) // 제한 퍼센트 (기본값 80%)
+
+  // 메타데이터
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  project         Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, date])
+  @@map("api_usage_logs")
+  @@index([projectId])
+  @@index([date])
+}

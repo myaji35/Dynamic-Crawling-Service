@@ -1,0 +1,60 @@
+# FlexCrawler - 서울 열린데이터광장 크롤링 예제
+# data.seoul.go.kr 실시간 도시데이터 수집
+
+version: '1.0'
+
+job:
+  name: '서울시 공공데이터 - 인기 데이터셋'
+  description: '서울 열린데이터광장에서 인기 데이터셋 정보 수집'
+
+  pipeline:
+    - step: crawl
+      source:
+        type: web
+        url: 'https://data.seoul.go.kr/dataList/datasetList.do'
+
+        timeout: 30000
+        wait_for: networkidle
+
+        fields:
+          # 데이터 제목
+          titles:
+            selector: '.data-list .tit'
+            multiple: true
+            transform: trim
+
+          # 데이터 설명
+          descriptions:
+            selector: '.data-list .txt'
+            multiple: true
+            transform: remove_whitespace
+
+          # 제공기관
+          departments:
+            selector: '.data-list .dept'
+            multiple: true
+            transform: trim
+
+          # 데이터 형식 (파일/오픈API 등)
+          formats:
+            selector: '.data-list .format'
+            multiple: true
+            transform: trim
+
+          # 조회수
+          views:
+            selector: '.data-list .view-count'
+            multiple: true
+            transform: extract_number
+
+      retry:
+        max_attempts: 3
+
+    - step: transform
+      rules:
+        - filter: '${titles.length > 0}'
+
+    - step: load
+      destination:
+        type: json
+        path: './output/seoul-open-data.json'

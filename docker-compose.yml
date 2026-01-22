@@ -1,0 +1,22 @@
+# Local PostgreSQL for backup/testing only
+# Production/Development uses GCP Cloud SQL
+# See: GCP_DATABASE_SETUP.md
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: dcs-postgres-local
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dcs_dev
+    ports:
+      - '5433:5432' # Different port to avoid conflict with Cloud SQL Proxy
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    profiles:
+      - local-only # Only start with: docker compose --profile local-only up
+
+volumes:
+  postgres_data:

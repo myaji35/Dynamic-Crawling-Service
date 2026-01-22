@@ -1,0 +1,34 @@
+# FlexCrawler PoC - Basic Example
+# 간단한 웹 크롤링 예제
+
+version: '1.0'
+
+job:
+  name: 'Basic Web Scraping'
+  description: 'Extract basic information from a web page'
+
+  pipeline:
+    - step: crawl
+      source:
+        type: web
+        url: 'https://example.com'
+
+        # 추출할 필드 정의
+        fields:
+          title:
+            selector: 'h1'
+            transform: trim
+
+          description:
+            selector: 'p'
+            transform: remove_whitespace
+
+          all_links:
+            selector: 'a'
+            attribute: 'href'
+            multiple: true
+
+      # 재시도 설정
+      retry:
+        max_attempts: 3
+        backoff: exponential

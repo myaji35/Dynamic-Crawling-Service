@@ -1,0 +1,56 @@
+# FlexCrawler PoC - Ecommerce Example
+# 전자상거래 사이트 가격 모니터링 예제
+
+version: '1.0'
+
+job:
+  name: 'Ecommerce Price Monitor'
+  description: 'Monitor product prices from an ecommerce site'
+
+  pipeline:
+    - step: crawl
+      source:
+        type: web
+        url: 'https://books.toscrape.com'
+
+        timeout: 30000
+        wait_for: networkidle
+
+        fields:
+          # 제품명
+          product_names:
+            selector: 'article.product_pod h3 a'
+            attribute: 'title'
+            multiple: true
+
+          # 가격
+          prices:
+            selector: 'article.product_pod .price_color'
+            multiple: true
+            transform: extract_price
+
+          # 평점
+          ratings:
+            selector: 'article.product_pod .star-rating'
+            attribute: 'class'
+            multiple: true
+
+          # 재고 상태
+          availability:
+            selector: 'article.product_pod .availability'
+            multiple: true
+            transform: trim
+
+      retry:
+        max_attempts: 3
+        backoff: exponential
+
+    - step: transform
+      rules:
+        - filter: '${prices.length > 0}'
+        - deduplicate: ['product_names']
+
+    - step: load
+      destination:
+        type: json
+        path: './output/ecommerce-data.json'
